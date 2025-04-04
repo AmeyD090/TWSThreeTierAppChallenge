@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: api
-  namespace: three-tier
+  namespace: 
   labels: 
     role: api
     env: demo
@@ -21,11 +21,9 @@ spec:
       labels:
         role: api
     spec:
-      imagePullSecrets:
-      - name: ecr-registry-secret
       containers:
       - name: api
-        image: 407622020962.dkr.ecr.us-east-1.amazonaws.com/backend:latest
+        image: 
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
