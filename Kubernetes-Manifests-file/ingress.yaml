@@ -2,29 +2,27 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mainlb
-  namespace: 
+  namespace: default  # Set this to your namespace, if not 'default'
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
-  ingressClassName: alb
+  ingressClassName: nginx
   rules:
     - host: ameydeshmukh.shop
       http:
         paths:
-          - path: /api
+          - path: /api/?(.*)
             pathType: Prefix
             backend:
               service:
                 name: api
-                port:   
+                port:
                   number: 3500
-          - path: /
+          - path: /?(.*)
             pathType: Prefix
             backend:
               service:
                 name: frontend
-                port: 
+                port:
                   number: 3000
-      
