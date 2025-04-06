@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: yfhates/back-end-repo:latest
+        image: yfhates/back-end:latest
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
